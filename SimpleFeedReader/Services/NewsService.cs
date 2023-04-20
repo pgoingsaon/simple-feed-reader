@@ -14,8 +14,12 @@ public class NewsService
         var news = new List<NewsStoryViewModel>();
         var feedUri = new Uri(feedUrl);
 
+        var readerSettings = new XmlReaderSettings();
+        readerSettings.Async = true;
+        readerSettings.DtdProcessing = DtdProcessing.Parse;
+        // new XmlReaderSettings { Async = true }
         using (var xmlReader = XmlReader.Create(feedUri.ToString(),
-               new XmlReaderSettings { Async = true }))
+               readerSettings))
         {
             try
             {
